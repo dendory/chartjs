@@ -1,6 +1,9 @@
 # chartjs
 Python 3.x implementation of ChartJS to create web based charts from Python scripts
 
+## Sample:
+![Sample](sample.jpg)
+
 ## Usage:
 Import the module:
 
@@ -41,7 +44,6 @@ Available parameters include:
 * pointStrokeColor (color)
 * pointHighlightFill (color)
 * pointHighlightStroke (color)
-* legendTemplate (HTML code)
 
 Add another dataset with the new values:
 

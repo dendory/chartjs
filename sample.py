@@ -5,7 +5,7 @@ import csv
 mychart = chartjs.chart("Wind energy visualization (in million KW/h) for 2010-2012", "Line", 1600, 800)
 
 # Set some basic options
-mychart.set_params(barValueSpacing = 100, scaleShowGridLines = False)
+mychart.set_params(barValueSpacing = 100)
 
 # Labels will be countries
 countries = []

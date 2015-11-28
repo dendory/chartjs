@@ -11,7 +11,7 @@ class chart:
 	def set_labels(self, labels):
 		self.labels = labels
 
-	def set_params(self, fillColor = None, strokeColor = None, highlightFill = None, highlightStroke = None, barValueSpacing = None, scaleShowGridLines = None, pointColor = None, pointStrokeColor = None, pointHighlightFill = None, pointHighlightStroke = None, legendTemplate = None):
+	def set_params(self, fillColor = None, strokeColor = None, highlightFill = None, highlightStroke = None, barValueSpacing = None, scaleShowGridLines = None, pointColor = None, pointStrokeColor = None, pointHighlightFill = None, pointHighlightStroke = None):
 		if fillColor:
 			self.fillColor = fillColor
 		if strokeColor:
@@ -32,8 +32,6 @@ class chart:
 			self.pointHighlightFill = pointHighlightFill
 		if pointHighlightStroke:
 			self.pointHighlightStroke = pointHighlightStroke
-		if legendTemplate:
-			self.legendTemplate = legendTemplate
 
 	def add_dataset(self, data):
 		if len(data) != len(self.labels):
@@ -52,11 +50,10 @@ class chart:
 				window.onload = function()
 				{{
 					var ctx = document.getElementById("{0}").getContext("{5}");
-					var my_chart = new Chart(ctx).{6}(chart_data, {{responsive: true, barValueSpacing: {7}, scaleShowGridLines: {8}, legendTemplate: {9}}});
-					my_chart.generateLegend();
+					window.mychart = new Chart(ctx).{6}(chart_data, {{responsive: true, barValueSpacing: {7}, scaleShowGridLines: {8}}});
 				}}
 			</script>
-""".format(str(self.canvas), str(self.height), str(self.width), str(self.labels), str(self.data), str(self.context), str(self.ctype), str(self.barValueSpacing), str(self.scaleShowGridLines).lower(), str(self.legendTemplate))
+""".format(str(self.canvas), str(self.height), str(self.width), str(self.labels), str(self.data), str(self.context), str(self.ctype), str(self.barValueSpacing), str(self.scaleShowGridLines).lower())
 		return output
 	
 	def make_chart_full_html(self):
@@ -106,7 +103,6 @@ class chart:
 		self.pointHighlightStroke = "rgba(220,220,220,1)"
 		self.barValueSpacing = 5
 		self.scaleShowGridLines = True
-		self.legendTemplate = "\"\""
 
 jsinline = """
 /*!
