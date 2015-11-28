@@ -50,6 +50,7 @@ Add another dataset with the new values:
     mychart.add_dataset([3, 1.2, 0.1, 3])
 
 Write out the HTML needed to draw the chart, to be inserted into an existing web page:
+
     print(mychart.make_chart())
 
 Or, write out a full HTML page with just the chart, that you can save as a .html file to open in a browser:
