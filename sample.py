@@ -18,7 +18,7 @@ headers = next(data)
 # Close CSV file
 f.close()
 
-# Print the resulting full HTML page. We could also write it to a .html file
-# or send the raw HTML to another framework using mychart.make_chart(), or use
-# mychart.make_chart_with_headers() to also include the HTTP headers.
-mychart.make_chart_full_html()
+# Write chart1.html
+f = open("chart1.html", 'w')
+f.write(mychart.make_chart_full_html())
+f.close()

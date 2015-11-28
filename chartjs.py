@@ -12,6 +12,7 @@ class chart:
 	#
 	def __init__(self):
 		self.title = "Untitled chart"
+		self.data = []
 		
 	def _is_int(self, num): # Check if a number
 		try:
@@ -24,15 +25,28 @@ class chart:
 	# Main functions
 	#
 	def make_chart(self):
-		print()
+		output = ""
+		return output
 	
 	def make_chart_full_html(self):
-		print()
-		self.make_chart()
-		print()
+		output = """<!doctype html>
+<html>
+	<head>
+		<title>{0}</title>
+		<script src="chart.js"></script>
+	</head>
+	<body>
+""".format(self.title)
+		output += self.make_chart()
+		output += """
+	</body>
+</html>
+"""
+		return output
 
 	def make_chart_with_headers(self):
-		print("HTTP/1.0 200 OK")
-		print("Content-Type: text/html; charset=utf-8")
-		print()
-		self.make_chart_full_html()
+		output = ""
+		output += "HTTP/1.0 200 OK\n"
+		output += "Content-Type: text/html; charset=utf-8\n\n"
+		output += self.make_chart_full_html()
+		return output
