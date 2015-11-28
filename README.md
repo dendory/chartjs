@@ -2,6 +2,8 @@
 Python 3.x implementation of ChartJS to create web based charts from Python scripts
 
 ## Sample:
+Created by: `python sample.py`
+
 ![Sample](sample.jpg)
 
 ## Usage:
