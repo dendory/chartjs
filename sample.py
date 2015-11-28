@@ -23,7 +23,7 @@ next(data) # Skip headers
 
 # Iterate through the file, then add datasets every time the country name changes
 for line in data:
-	if len(line) > 4:
+	if len(line) > 4 and float(line[4]) > 100:
 		if line[0] not in countries:
 			# Place the values of the last country in our lists
 			if countries != []:
