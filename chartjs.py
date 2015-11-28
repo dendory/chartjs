@@ -5,13 +5,13 @@
 import json
 
 version = "0.1"
-ctypes = ["Bar"]
+ctypes = ["Bar", "Pie", "Doughnut", "PolarArea", "Radar", "Line"]
 
 class chart:
 	def set_labels(self, labels):
 		self.labels = labels
 
-	def set_params(self, fillColor = None, strokeColor = None, highlightFill = None,	highlightStroke = None):
+	def set_params(self, fillColor = None, strokeColor = None, highlightFill = None, highlightStroke = None, barValueSpacing = None, scaleShowGridLines = None, pointColor = None, pointStrokeColor = None, pointHighlightFill = None, pointHighlightStroke = None, legendTemplate = None):
 		if fillColor:
 			self.fillColor = fillColor
 		if strokeColor:
@@ -20,11 +20,25 @@ class chart:
 			self.highlightFill = highlightFill
 		if highlightStroke:
 			self.highlightStroke = highlightStroke
+		if barValueSpacing:
+			self.barValueSpacing = barValueSpacing
+		if scaleShowGridLines != None:
+			self.scaleShowGridLines = scaleShowGridLines
+		if pointColor:
+			self.pointColor = pointColor
+		if pointStrokeColor:
+			self.pointStrokeColor = pointStrokeColor
+		if pointHighlightFill:
+			self.pointHighlightFill = pointHighlightFill
+		if pointHighlightStroke:
+			self.pointHighlightStroke = pointHighlightStroke
+		if legendTemplate:
+			self.legendTemplate = legendTemplate
 
 	def add_dataset(self, data):
 		if len(data) != len(self.labels):
 			raise ValueError("Data must be the same size as labels")
-		self.data.append({"data": data, "fillColor": self.fillColor, "strokeColor": self.strokeColor, "highlightFill": self.highlightFill, "highlightStroke": self.highlightStroke})
+		self.data.append({"data": data, "fillColor": self.fillColor, "strokeColor": self.strokeColor, "highlightFill": self.highlightFill, "highlightStroke": self.highlightStroke, 		"pointColor": self.pointColor, "pointStrokeColor": self.pointStrokeColor, "pointHighlightFill": self.pointHighlightFill, "pointHighlightStroke": self.pointHighlightStroke})
 
 	def make_chart(self):
 		output = """
@@ -38,10 +52,11 @@ class chart:
 				window.onload = function()
 				{{
 					var ctx = document.getElementById("{0}").getContext("{5}");
-					window.mychart = new Chart(ctx).{6}(chart_data, {{responsive: true}});
+					var my_chart = new Chart(ctx).{6}(chart_data, {{responsive: true, barValueSpacing: {7}, scaleShowGridLines: {8}, legendTemplate: {9}}});
+					my_chart.generateLegend();
 				}}
 			</script>
-""".format(str(self.canvas), str(self.height), str(self.width), str(self.labels), str(self.data), str(self.context), str(self.ctype))
+""".format(str(self.canvas), str(self.height), str(self.width), str(self.labels), str(self.data), str(self.context), str(self.ctype), str(self.barValueSpacing), str(self.scaleShowGridLines).lower(), str(self.legendTemplate))
 		return output
 	
 	def make_chart_full_html(self):
@@ -52,8 +67,9 @@ class chart:
 		<script>{1}</script>
 	</head>
 	<body>
-		<div style="max-width: 50%; max-height: 50%">
-""".format(str(self.title), jsinline)
+		<div style="width: {2}px; height: {3}px; max-width: 99%" class="chartjs">
+			<center><h2>{0}</h2></center>
+""".format(str(self.title), jsinline, str(self.width), str(self.height))
 		output += self.make_chart()
 		output += """
 		</div>
@@ -84,6 +100,13 @@ class chart:
 		self.strokeColor = "rgba(151,187,205,0.8)"
 		self.highlightFill = "rgba(151,187,205,0.75)"
 		self.highlightStroke = "rgba(151,187,205,1)"
+		self.pointColor = "rgba(220,220,220,1)"
+		self.pointStrokeColor = "rgba(250,250,250,1)"
+		self.pointHighlightFill = "rgba(250,250,250,1)"
+		self.pointHighlightStroke = "rgba(220,220,220,1)"
+		self.barValueSpacing = 5
+		self.scaleShowGridLines = True
+		self.legendTemplate = "\"\""
 
 jsinline = """
 /*!
