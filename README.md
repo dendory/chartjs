@@ -54,7 +54,9 @@ Write out the HTML needed to draw the chart, to be inserted into an existing web
     print(mychart.make_chart())
 
 Or, write out a full HTML page with just the chart, that you can save as a .html file to open in a browser:
+
     print(mychart.make_chart_full_html())
 
 Or, write out a full HTML page including the top HTTP header, perfect if you're using your script as a CGI:
+
     print(mychart.make_chart_with_headers())
