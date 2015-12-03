@@ -17,7 +17,7 @@ values2010 = []
 value = {'2010': 0, '2011': 0, '2012': 0}
 
 # Read data from sample.csv
-f = open("sample.csv", 'r', newline='')
+f = open("data/sample.csv", 'r', newline='')
 data = csv.reader(f, delimiter=',')
 next(data) # Skip headers
 

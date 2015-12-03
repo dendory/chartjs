@@ -22,14 +22,16 @@
 
 			<canvas id="canvas" height="480" width="640"></canvas>
 			<script>
-				var chart_data = 
-			[{'color': '#E24736', 'highlight': '#E07369', 'label': 'Apple', 'value': 5}, {'color': '#FF9438', 'highlight': '#FFAC68', 'label': 'Orange', 'value': 2}, {'color': '#FFF249', 'highlight': '#FFF293', 'label': 'Banana', 'value': 10}]
+				var chart_datacanvas = 
+			[{'value': 5, 'color': '#E24736', 'label': 'Apple', 'highlight': '#E07369'}, {'value': 2, 'color': '#FF9438', 'label': 'Orange', 'highlight': '#FFAC68'}, {'value': 10, 'color': '#FFF249', 'label': 'Banana', 'highlight': '#FFF293'}]
 
+			</script>
+			<script>
 				window.onload = function()
-				{
+				{{
 					var ctx = document.getElementById("canvas").getContext("2d");
-					window.mychart = new Chart(ctx).PolarArea(chart_data, {responsive: true, barValueSpacing: 5, scaleShowGridLines: true, scaleBeginAtZero: false});
-				}
+					var mychart = new Chart(ctx).PolarArea(chart_datacanvas, {responsive: true, barValueSpacing: 5, scaleShowGridLines: true, scaleBeginAtZero: false});
+				}}
 			</script>
 
 		</div>

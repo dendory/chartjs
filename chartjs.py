@@ -2,7 +2,7 @@
 # Python ChartJS - (C) 2015 Patrick Lambert - Provided under the MIT License
 # Uses the ChartJS JavaScript implementation by Nick Downie
 #
-version = "1.0"
+version = "1.1"
 ctypes = ["Bar", "Pie", "Doughnut", "PolarArea", "Radar", "Line"]
 
 class chart:
@@ -61,15 +61,14 @@ class chart:
 			for i, d in enumerate(data):
 				self.data.append({'value': int(d), 'color': str(self.colors[i]), 'highlight': str(self.highlights[i]), 'label': str(self.labels[i])})
 
-	# Make a chart based on datasets
-	def make_chart(self):
+	# Make a chart canvas part
+	def make_chart_canvas(self):
 		if self.ctype == "Bar" or self.ctype == "Radar" or self.ctype == "Line":  
 			dataset = """
 				{{
 					labels: {0},
 					datasets: {1}
-				}}
-""".format(str(self.labels), str(self.data))
+				}}""".format(str(self.labels), str(self.data))
 		else:
 			dataset = """
 			{0}
@@ -77,16 +76,31 @@ class chart:
 		output = """
 			<canvas id="{0}" height="{1}" width="{2}"></canvas>
 			<script>
-				var chart_data = {3}
-				window.onload = function()
-				{{
-					var ctx = document.getElementById("{0}").getContext("{4}");
-					window.mychart = new Chart(ctx).{5}(chart_data, {{responsive: true, barValueSpacing: {6}, scaleShowGridLines: {7}, scaleBeginAtZero: {8}}});
-				}}
+				var chart_data{0} = {3}
 			</script>
-""".format(str(self.canvas), str(self.height), str(self.width), dataset, str(self.context), str(self.ctype), str(self.barValueSpacing), str(self.scaleShowGridLines).lower(), str(self.scaleBeginAtZero).lower())
+""".format(str(self.canvas), str(self.height), str(self.width), dataset)
 		return output
 
+	# Make onload function
+	def make_chart_onload(self):
+		output = """
+					var ctx = document.getElementById("{0}").getContext("{1}");
+					var mychart = new Chart(ctx).{2}(chart_data{0}, {{responsive: true, barValueSpacing: {3}, scaleShowGridLines: {4}, scaleBeginAtZero: {5}}});
+""".format(str(self.canvas), str(self.context), str(self.ctype), str(self.barValueSpacing), str(self.scaleShowGridLines).lower(), str(self.scaleBeginAtZero).lower())
+		return output
+
+	# Make a chart based on datasets
+	def make_chart(self):
+		output = self.make_chart_canvas()
+		output += """			<script>
+				window.onload = function()
+				{{"""
+		output += self.make_chart_onload()
+		output += """				}}
+			</script>
+"""
+		return output
+		
 	# Make a full HTML page
 	def make_chart_full_html(self):
 		output = """<!doctype html>
