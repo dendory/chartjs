@@ -1,5 +1,5 @@
 # chartjs
-Python 3.x implementation of ChartJS to create web based charts from Python scripts
+This is an easy to use Python 3.x wrapper of ChartJS to create web based charts from Python scripts. It features the most commonly used functions and supports 6 chart types.
 
 ## Sample:
 Created by: `python sample.py`
@@ -46,10 +46,17 @@ Available parameters include:
 * pointStrokeColor (color)
 * pointHighlightFill (color)
 * pointHighlightStroke (color)
+* JSinline (True or False)
+* scaleBeginAtZero (True or False)
 
-Add another dataset with the new values:
+Add another dataset with the new colors:
 
     mychart.add_dataset([3, 1.2, 0.1, 3])
+
+Note that these colors affect the whole chart for Line, Bar and Radar charts. For Pie, Daughnut and PolarArea, you should set colors and highlights for each value in your data set:  
+
+    mychart.set_colors(['#FA0000', '#008811', '#0055FA', '#559090'])
+    mychart.set_highlights(['#FF0000', '#00B851', '#0055FF', '#75B0B0'])
 
 Write out the HTML needed to draw the chart, to be inserted into an existing web page:
 
