@@ -6,6 +6,10 @@ Created by: `python sample.py`
 
 ![Sample](sample.jpg)
 
+## Installation:
+
+    pip install chartjs
+
 ## Usage:
 Import the module:
 

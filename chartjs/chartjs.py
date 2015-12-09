@@ -1,8 +1,7 @@
 #
-# Python ChartJS - (C) 2015 Patrick Lambert - Provided under the MIT License
+# Python ChartJS - (C) 2015 Patrick Lambert - Provided under the MIT License - https://github.com/dendory/chartjs
 # Uses the ChartJS JavaScript implementation by Nick Downie
 #
-version = "1.1"
 ctypes = ["Bar", "Pie", "Doughnut", "PolarArea", "Radar", "Line"]
 
 class chart:
